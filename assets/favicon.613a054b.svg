@@ -4,8 +4,15 @@
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="100pt" height="100pt" viewBox="0 0 2135.000000 2137.000000"
  preserveAspectRatio="xMidYMid meet">
+ <defs>
+
+      <radialGradient id="RadialGradient" cx="0.5" cy="0.8" r="0.5">
+        <stop offset="0%" stop-color="white"/>
+        <stop offset="100%" stop-color="red"/>
+      </radialGradient>
+  </defs>
 <g transform="translate(0.000000,2137.000000) scale(0.100000,-0.100000)"
-fill="#FF0000" stroke="none">
+fill="url(#RadialGradient)" stroke="none">
 <path d="M10216 20349 c-1297 -52 -2473 -351 -3616 -920 -247 -123 -344 -176
 -745 -411 -328 -192 -446 -267 -660 -417 -989 -691 -1891 -1609 -2541 -2586
 -126 -188 -443 -704 -539 -875 -545 -972 -919 -2139 -1044 -3255 -100 -887
