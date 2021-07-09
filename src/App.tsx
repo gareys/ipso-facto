@@ -12,6 +12,7 @@ function App() {
   const [ipInfo, setipInfo] = useState<IPInfo | undefined>();
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [rerender, setRerender] = useState(true);
 
   useEffect(() => {
     const fetchIPInfo = async () => {
@@ -22,15 +23,18 @@ function App() {
         setError(true);
       } finally {
         setLoading(false);
+        setRerender(false);
       }
     };
-    fetchIPInfo();
-  }, []);
+    if (rerender) fetchIPInfo();
+  }, [rerender]);
 
   return (
     <div className="App">
-      <header className="App-header">
-        {loading && <img data-testid="ball" src={ball} id="ball" />}
+      <section className="App-container">
+        {loading && (
+          <img data-testid="loading-ball" src={ball} className="ball" />
+        )}
         {error && (
           <>
             <GifPlayer
@@ -38,20 +42,69 @@ function App() {
               gif={errorImg}
               still={errorStillImg}
             />
-            <h2 data-testid="error-text">We were unable to retrieve your IP</h2>
+            <h2 data-testid="error-text" id="error-text">
+              We were unable to retrieve your IP
+            </h2>
           </>
         )}
         {!error && !loading && <GifPlayer gif={ipsoImg} still={ipsoStillImg} />}
         {ipInfo && (
-          <>
-            <h1 data-testid="ip-address">{ipInfo.ip}</h1>
-            <p data-testid="isp">{ipInfo.isp}</p>
-            <p data-testid="location">
-              {ipInfo.city}, {ipInfo.region} {ipInfo.postal_code}
-            </p>
-          </>
+          <div className="ipInfo">
+            <div id="info-left">
+              <h1 data-testid="ip-address">{ipInfo.ip}</h1>
+              <small>Your IP Address</small>
+              <p data-testid="isp">{ipInfo.isp}</p>
+              <small>
+                Your <abbr title="Internet Service Provider">ISP</abbr>
+              </small>
+              <p data-testid="location">
+                {ipInfo.city}, {ipInfo.region} {ipInfo.postal_code}
+              </p>
+              <small>Your Location</small>
+            </div>
+            <div id="info-right">
+              <img
+                data-testid="ball"
+                src={ball}
+                id="info-ball"
+                className="ball"
+              />
+            </div>
+          </div>
         )}
-      </header>
+        <details id="dev-menu">
+          <summary>&#128295;</summary>
+          <div id="dev-menu-contents">
+            <button
+              onClick={() => {
+                setLoading(false);
+                setError(true);
+                setipInfo(undefined);
+              }}
+            >
+              Show Error State
+            </button>
+            <button
+              onClick={() => {
+                setLoading(true);
+                setError(false);
+                setipInfo(undefined);
+              }}
+            >
+              Show Loading State
+            </button>
+            <button
+              onClick={() => {
+                setError(false);
+                setLoading(true);
+                setRerender(true);
+              }}
+            >
+              Rerender App
+            </button>
+          </div>
+        </details>
+      </section>
     </div>
   );
 }

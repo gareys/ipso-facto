@@ -15,9 +15,9 @@ describe('App', () => {
     });
     const { getByText, getByTestId, queryByTestId } = await render(<App />);
 
-    expect(queryByTestId('ball')).not.toBeNull();
+    expect(queryByTestId('loading-ball')).not.toBeNull();
     await waitFor(() => getByText('1.1.1.1'));
-    expect(queryByTestId('ball')).toBeNull();
+    expect(queryByTestId('loading-ball')).toBeNull();
   });
 
   it('displays the IP address', async () => {
