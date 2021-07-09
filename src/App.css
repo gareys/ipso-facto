@@ -96,8 +96,8 @@
 
 #dev-menu {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 5px;
+  right: 5px;
   padding: 5px;
   cursor: pointer;
   user-select: none;
@@ -122,6 +122,15 @@
 #dev-menu-contents button {
   cursor: pointer;
   width: 100%;
+}
+
+#dev-menu-wrench {
+  font-size: 20px;
+  transition: 1s transform;
+}
+
+details summary:hover #dev-menu-wrench {
+  transform: rotate(360deg);
 }
 
 details summary::-webkit-details-marker,

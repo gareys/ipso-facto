@@ -73,7 +73,9 @@ function App() {
           </div>
         )}
         <details id="dev-menu">
-          <summary>&#128295;</summary>
+          <summary>
+            <div id="dev-menu-wrench">&#128295;</div>
+          </summary>
           <div id="dev-menu-contents">
             <button
               onClick={() => {
