@@ -1,8 +1,7 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import App from './App';
-import * as ipServiceModule from './ipService';
-import { act } from 'react-dom/test-utils';
+import * as ipServiceModule from '../../services/ipService';
 
 describe('App', () => {
   it('toggles display of the loading ball', async () => {

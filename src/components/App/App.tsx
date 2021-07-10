@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import GifPlayer from 'react-gif-player';
-import { IPInfo, ipService } from './ipService';
-import ipsoImg from './ipso.gif';
-import ipsoStillImg from './ipso-still.png';
-import errorImg from './error.gif';
-import errorStillImg from './error-still.png';
-import ball from './favicon.svg';
+import { IPInfo, ipService } from '../../services/ipService';
+import ipsoImg from '../../images/ipso.gif';
+import ipsoStillImg from '../../images/ipso-still.png';
+import errorImg from '../../images/error.gif';
+import errorStillImg from '../../images/error-still.png';
+import ball from '../../images/favicon.svg';
 import './App.css';
 
 function App() {
