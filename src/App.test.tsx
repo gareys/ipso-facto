@@ -38,6 +38,25 @@ describe('App', () => {
     );
   });
 
+  it('truncates and displays a long IPv6 address', async () => {
+    jest.spyOn(ipServiceModule, 'ipService').mockResolvedValue({
+      ip: '2001:0db8:85a3:0000:0000:8a2e:0370:7334',
+      isp: 'FOO ISP',
+      city: 'FOO CITY',
+      region: 'FOO REGION',
+      postal_code: 'FOO POSTAL CODE',
+    });
+    const { getByText, getByTestId, getByTitle } = render(<App />);
+    await waitFor(() => getByText('2001:0db8:85...'));
+
+    expect(getByTestId('ip-address').textContent).toBe('2001:0db8:85...');
+    expect(getByTitle('2001:0db8:85a3:0000:0000:8a2e:0370:7334')).toBeDefined();
+    expect(getByTestId('isp').textContent).toBe('FOO ISP');
+    expect(getByTestId('location').textContent).toBe(
+      'FOO CITY, FOO REGION FOO POSTAL CODE'
+    );
+  });
+
   it('displays the error gif when ip data fails', async () => {
     jest.spyOn(ipServiceModule, 'ipService').mockRejectedValue('FOO ERROR');
     const { getByTestId } = render(<App />);

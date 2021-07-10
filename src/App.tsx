@@ -19,6 +19,7 @@ function App() {
       try {
         const ipData = await ipService();
         setipInfo(ipData);
+        console.log(ipData);
       } catch (e) {
         setError(true);
       } finally {
@@ -51,7 +52,13 @@ function App() {
         {ipInfo && (
           <div className="ipInfo">
             <div id="info-left">
-              <h1 data-testid="ip-address">{ipInfo.ip}</h1>
+              <h1 data-testid="ip-address">
+                {ipInfo.ip.length > 15 ? (
+                  <abbr title={ipInfo.ip}>{ipInfo.ip.slice(0, 12)}...</abbr>
+                ) : (
+                  <>{ipInfo.ip}</>
+                )}
+              </h1>
               <small>Your IP Address</small>
               <p data-testid="isp">{ipInfo.isp}</p>
               <small>
